@@ -4,7 +4,7 @@ import RPIO
 
 def socket_callback(socket, val):
     print("socket %s: '%s'" % (socket.fileno(), val))
-    socket.send("echo: %s\n" % val)
+    #socket.send("echo: %s\n" % val)
     #RPIO.close_tcp_client(socket.fileno())
     if val == "TurnOn":
     	pfd.relays[1].value = 1
@@ -13,7 +13,8 @@ def socket_callback(socket, val):
     elif val == "Disconnect":
     	RPIO.close_tcp_client(socket.fileno())
     else:
-    	socket.send("Not supported command")
+    	val = val + " not supported"
+    socket.send("echo: %s\n" % val)
 
 
 
