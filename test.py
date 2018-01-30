@@ -12,6 +12,7 @@ def socket_callback(socket, val):
     	pfd.relays[1].value = 0
     elif val == "Disconnect":
     	RPIO.close_tcp_client(socket.fileno())
+        sys.exit(1)
     else:
     	val = val + " not supported"
     socket.send("echo: %s\n" % val)
